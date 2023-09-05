@@ -1,23 +1,34 @@
-import logo from './logo.svg';
+import React from 'react';
+import { useState } from 'react';
 import './App.css';
 
+const todos = [
+  {
+    id:1,
+    description: 'say hello',
+    isDone: false
+  }, 
+  {
+    id:2,
+    description: 'say hello again',
+    isDone: false
+  }
+]
+
 function App() {
+  const [todo, setTodos] = useState(''); 
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <input value={todo} onChange={(e) => setTodos(e.target.value)} />
+      <button>Submit</button>
+      {todos.map((todo, index) => (
+        <div key={index}>
+          <span className={todo.isDone ? 'done' : ''}>{todo.description}</span>
+          <span>
+            <button>{todo.isDone ? 'Delete' : 'Complete'}</button>
+          </span>
+        </div>
+      ))}
     </div>
   );
 }
