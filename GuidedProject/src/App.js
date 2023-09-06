@@ -1,7 +1,7 @@
 import React from 'react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import './App.css';
-
+import { getTodos, postTodo } from './actions/todos';
 const todos = [
   {
     id:1,
@@ -11,12 +11,19 @@ const todos = [
   {
     id:2,
     description: 'say hello again',
-    isDone: false
+    isDone: true
   }
 ]
 
 function App() {
   const [todo, setTodos] = useState(''); 
+
+  useEffect(() => {
+    getTodos();
+  }, [])
+
+ 
+
   return (
     <div className="App">
       <input value={todo} onChange={(e) => setTodos(e.target.value)} />
